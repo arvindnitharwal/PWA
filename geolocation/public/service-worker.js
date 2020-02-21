@@ -10,13 +10,13 @@ self.addEventListener('install', event => {
       .then(function(cache) {
         return cache.addAll(
           [
-            'geolocation/public/index.html',
-            'geolocation/src/App.css',
-            'geolocation/src/App.js',
-            'geolocation/src/index.js',
-            'geolocation/src/index.css',
+            '/index.html',
+            '/App.css',
+            '/App.js',
+            '/index.js',
+            '/index.css',
             '/manifest.json',
-            'static/js/bundle.js'
+            '/bundle.js'
           ]
         );
       })
