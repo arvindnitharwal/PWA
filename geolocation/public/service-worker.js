@@ -1,9 +1,7 @@
 var CACHE_NAME = 'pwa-task-manager';
 var urlsToCache = [
   '/',
-  '/completed'
 ];
-
 // Install a service worker
 self.addEventListener('install', event => {
   // Perform install steps
