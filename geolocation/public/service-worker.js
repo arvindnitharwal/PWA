@@ -8,25 +8,29 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        return cache.addAll(
+          [
+            'geolocation/public/index.html',
+            'geolocation/src/App.css',
+            'geolocation/src/App.js',
+            'geolocation/src/index.js',
+            'geolocation/src/index.css',
+            '/manifest.json',
+            'static/js/bundle.js'
+          ]
+        );
       })
   );
 });
 
 // Cache and return requests
 self.addEventListener('fetch', event => {
+  console.log(event.request.url);
   event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  ); 
 });
 
 // Update a service worker
