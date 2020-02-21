@@ -1,0 +1,15 @@
+{
+    "short_name": "React App",
+    "name": "Create React App Sample",
+    "icons": [
+      {
+        "src": "http://aibono.com/wp-content/uploads/2019/10/footer-logo.png",
+        "type": "image/png",
+        "sizes": "150x32"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+  }
