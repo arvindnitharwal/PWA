@@ -6,7 +6,7 @@ self.addEventListener('install', event => {
      await cache.addAll(
           [
             '/manifest.json',
-            '/geolocationOffline.html',
+            '/geolocationoffline.html',
           ]
         );
       }())
@@ -30,6 +30,9 @@ self.addEventListener('install', event => {
 // Cache and return requests
 self.addEventListener('fetch', event => {
   event.respondWith( async function(){
+    const availableCache= await caches.open('geolocation_aibono');
+    let response=await availableCache.match('/geolocationoffline.html');
+    return response;
     if(event.request.url.indexOf('/geolocation') < 0){
       const availableCache= await caches.open('geolocation_dynamic');
       try{
@@ -44,7 +47,7 @@ self.addEventListener('fetch', event => {
     }
     catch(err){
       const availableCache= await caches.open('geolocation_aibono');
-      let response=await availableCache.match('/geolocationOffline.html');
+      let response=await availableCache.match('/geolocationoffline.html');
       return response;
     }
   }
@@ -59,7 +62,7 @@ self.addEventListener('fetch', event => {
 //     caches.match(event.request).then(function(response) {
 //       return response || fetch(event.request);
 //     }).catch(function() {
-//       return caches.match('/offline.html');
+//       return caches.match('/geolocationOffline.html');
 //     })
 //   ); 
 // });
