@@ -5,11 +5,14 @@
   </head>
   <body>
     <div id="root">
-        <p class="page-info"></p>
+      <h3>Geo Location Offline</h3>
+      <p class="time-info"></p>
+      <p class="page-info"></p>
     </div>
     <script>
       navigator.geolocation.getCurrentPosition(function(position){
     document.getElementsByClassName("page-info")[0].innerText=`lat=${position.coords.latitude} long=${position.coords.longitude}`;
+    document.getElementsByClassName("time-info")[0].innerText=`timeStamp=${position.timestamp}`;
   });
     </script>
   </body>
