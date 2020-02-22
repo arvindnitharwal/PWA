@@ -32,7 +32,7 @@ self.addEventListener('fetch', event => {
   event.respondWith( async function(){
     if(event.request.url.indexOf('/geolocation') < 0){
       const availableCache= await caches.open('geolocation_dynamic');
-      if(navigator.onLine){
+      try{
       const networkResponse = await fetch(event.request);
       // const cachedResponse = await availableCache.match(event.request);
       // if(cachedResponse) return cachedResponse;
@@ -42,7 +42,7 @@ self.addEventListener('fetch', event => {
       );
       return networkResponse;
     }
-    else{
+    catch(err){
       const availableCache= await caches.open('geolocation_aibono');
       return await availableCache.match('/geolocationOffline.html');
     }
