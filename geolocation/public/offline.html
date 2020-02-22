@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AIBONO App</title>
+  </head>
+  <body>
+    <div id="root">
+        <p class="page-info"></p>
+    </div>
+    <script>
+      navigator.geolocation.getCurrentPosition(function(position){
+    document.getElementsByClassName("page-info")[0].innerText=`lat=${position.coords.latitude} long=${position.coords.longitude}`;
+  });
+    </script>
+  </body>
+</html>
