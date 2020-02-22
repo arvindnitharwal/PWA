@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Route exact path="/geolocation/" component={CurrentTasks}/>
+          <Route exact path="/" component={CurrentTasks}/>
         </div>
       </BrowserRouter>
     );
