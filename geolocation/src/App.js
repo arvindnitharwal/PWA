@@ -3,8 +3,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
 const NavBar = () => (
   <div className="navbar">
-    <h3>Task Manager</h3>
-    <Link to="/">Current Tasks</Link>
+    <h3>Geo Location</h3>
   </div>
 );
 const geoSuccess=() =>{
@@ -28,16 +27,12 @@ const CurrentTasks = () => (
   <Template title="Current Tasks" status="Current"/>
 );
 
-const CompletedTasks = () => (
-  <Template title="Completed Tasks" status="Completed"/>
-);
-
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Route exact path="/" component={CurrentTasks}/>
+          <Route exact path="/geolocation/" component={CurrentTasks}/>
         </div>
       </BrowserRouter>
     );
