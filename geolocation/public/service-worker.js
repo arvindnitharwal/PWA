@@ -1,7 +1,4 @@
 var CACHE_NAME = 'pwa-task-manager';
-var urlsToCache = [
-  '/',
-];
 // Install a service worker
 self.addEventListener('install', event => {
   // Perform install steps
@@ -10,13 +7,14 @@ self.addEventListener('install', event => {
       .then(function(cache) {
         return cache.addAll(
           [
-            '/index.html',
-            '/App.css',
-            '/App.js',
-            '/index.js',
-            '/index.css',
+            // 'geolocation/public/index.html',
+            // 'geolocation/src/App.css',
+            // 'geolocation/src/App.js',
+            // 'geolocation/src/index.js',
+            // 'geolocation/src/index.css',
             '/manifest.json',
-            '/bundle.js'
+            //'static/js/bundle.js',
+            '/offline.html',
           ]
         );
       })
@@ -29,6 +27,8 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(function(response) {
       return response || fetch(event.request);
+    }).catch(function() {
+      return caches.match('/offline.html');
     })
   ); 
 });
