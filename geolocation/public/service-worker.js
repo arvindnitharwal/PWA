@@ -44,7 +44,8 @@ self.addEventListener('fetch', event => {
     }
     catch(err){
       const availableCache= await caches.open('geolocation_aibono');
-      return await availableCache.match('/geolocationOffline.html');
+      let response=await availableCache.match('/geolocationOffline.html');
+      return response;
     }
   }
   else{
