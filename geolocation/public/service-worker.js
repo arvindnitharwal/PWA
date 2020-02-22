@@ -30,7 +30,7 @@ self.addEventListener('install', event => {
 // Cache and return requests
 self.addEventListener('fetch', event => {
   event.respondWith( async function(){
-    if(event.request.url.indexOf('/geolocation') > -1){
+    if(event.request.url.indexOf('/geolocation') < 0){
       const availableCache= await caches.open('geolocation_dynamic');
       if(navigator.onLine){
       const networkResponse = await fetch(event.request);
