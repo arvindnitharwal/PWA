@@ -1,4 +1,4 @@
-var CACHE_NAME = 'geolocation_aibono';
+var CACHE_NAME = 'geolocation_cache';
 // Install a service worker
 self.addEventListener('install', event => {
   event.waitUntil( async function(){
@@ -15,7 +15,7 @@ self.addEventListener('install', event => {
  // Update or Activate a service worker
  self.addEventListener('activate', event =>{
   event.waitUntil( async function(){
-    let cacheWhitelist = ['geolocation_aibono'];
+    let cacheWhitelist = ['geolocation_cache'];
     let cacheNames = await caches.keys();
      await Promise.all(
       cacheNames.map(element => {
@@ -30,30 +30,23 @@ self.addEventListener('install', event => {
 // Cache and return requests
 self.addEventListener('fetch', event => {
   event.respondWith( async function(){
-    const availableCache= await caches.open('geolocation_aibono');
-    let response=await availableCache.match('/geolocationoffline.html');
-    return response;
-    if(event.request.url.indexOf('/geolocation') < 0){
-      const availableCache= await caches.open('geolocation_dynamic');
-      try{
+    // const availableCache= await caches.open('geolocation_cache');
+      // const availableCache= await caches.open('geolocation_dynamic');
+      try
+      {
       const networkResponse = await fetch(event.request);
       // const cachedResponse = await availableCache.match(event.request);
       // if(cachedResponse) return cachedResponse;
-      // const networkResponse = await fetch(event.request);
-      event.waitUntil(
-        availableCache.put(event.request, networkResponse.clone())
-      );
+      // event.waitUntil(
+      //   availableCache.put(event.request, networkResponse.clone())
+      // );
       return networkResponse;
     }
     catch(err){
-      const availableCache= await caches.open('geolocation_aibono');
+      const availableCache= await caches.open('geolocation_cache');
       let response=await availableCache.match('/geolocationoffline.html');
       return response;
     }
-  }
-  else{
-      return await fetch(event.request);
-  }
   }())
 });
 // self.addEventListener('fetch', event => {
