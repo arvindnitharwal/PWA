@@ -10,10 +10,14 @@
       <p class="page-info"></p>
     </div>
     <script>
-      navigator.geolocation.getCurrentPosition(function(position){
+    navigator.geolocation.getCurrentPosition(onSuccess,onFail,{enableHighAccuracy:true});
+  function onSuccess(position){
     document.getElementsByClassName("page-info")[0].innerText=`lat=${position.coords.latitude} long=${position.coords.longitude}`;
     document.getElementsByClassName("time-info")[0].innerText=`timeStamp=${position.timestamp}`;
-  });
+  }
+  function onFail(err){
+    document.getElementsByClassName("page-info")[0].innerText="Fail";
+  }
     </script>
   </body>
 </html>
