@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import {View } from 'react-native';
+import {View ,StyleSheet} from 'react-native';
 import AndroidFusedLocation from '../components/AndroidFusedLocation';
 import BatchDetails from '../components/BatchDetails';
 import ErrorBoundary from 'react-native-error-boundary'
@@ -13,11 +13,15 @@ export default class GeoLocation extends Component {
       )
     render(){
         return(
-            <View>
+            <View style={styles.wrapper}>
             <ErrorBoundary FallbackComponent={this.Fallback}>
-            <BatchDetails/>
-            <AndroidFusedLocation/>
+            <BatchDetails navigation={this.props.navigation}/>
+            <AndroidFusedLocation navigation={this.props.navigation}/>
             </ErrorBoundary>
         </View>
     )}
 }
+const styles = StyleSheet.create({
+  wrapper: {
+    margin : 20
+  }});

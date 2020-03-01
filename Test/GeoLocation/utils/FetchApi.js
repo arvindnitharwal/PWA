@@ -1,13 +1,17 @@
-const Fetch = async (request) =>{
-    try {
-        let response = await fetch(request.url,{
-            method:request.method,
-            body:JSON.stringify(request.body)
-        });
-        let responseJson = await response.json();
-        return responseJson;
-      } catch (error) {
-        console.error(error);
+import { get } from '../store/AsyncStorage';
+export const Fetch = async(request) =>{
+    let userToken='';
+    if(request.isAuthorized){
+        userToken= await get("access");
     }
+    let response = await fetch(request.url,{
+        method:request.method,
+        headers: new Headers({
+            'content-type': 'application/json',
+            'Authorization': userToken
+        }),
+        body:JSON.stringify(request.body)
+    });
+    let responseJson = await response.json();
+    return responseJson;
 }
-export default FetchApi;

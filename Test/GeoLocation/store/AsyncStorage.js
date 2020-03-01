@@ -1,15 +1,16 @@
 import { AsyncStorage } from 'react-native';
-const save = async(key, value) => {
+export const save = async(key, value) => {
     try {
       await AsyncStorage.setItem(key, JSON.stringify(value));
       return true;
     } catch (error) {
       console.log(error.message);
+      //show alert message for each console.log
       return false;
     }
   };
 
-  const get = async (key) => {
+  export const get = async (key) => {
     let value = '';
     try {
         value = await AsyncStorage.getItem(key) || 'none';
@@ -19,7 +20,7 @@ const save = async(key, value) => {
     return value;
   }
 
-  const remove = async (key) => {
+  export const remove = async (key) => {
     try {
       await AsyncStorage.removeItem(key);
       return true;
@@ -29,13 +30,32 @@ const save = async(key, value) => {
     }
   }
 
-  const update = async (key,value) => {
+  export const update = async (key,value) => {
     try {
-      await AsyncStorage.mergeItem(key,JSON.stringify(value));
+      let locationArray = [];
+      let response = await AsyncStorage.getItem(key) || null;
+      if(response!=null){
+      response=JSON.parse(response);
+      locationArray=response;
+      }
+      locationArray.push(value);
+      await AsyncStorage.setItem(key, JSON.stringify(locationArray));
       return true;
     } catch (error) {
       console.log(error.message);
       return false;
     }
   }
-  export default AsyncStorage;
+
+///action
+  export const ACTION ={
+    GET : "get",
+    SAVE : "save",
+    REMOVE : "remove",
+    UPDATE : "update"
+}
+///keys
+export const STORAGEKEYS ={
+  BATCHLOCATION : "aibono_batchlocation_",
+  BATCHTOBESYNC :"aibono_batchtobesync"
+}
