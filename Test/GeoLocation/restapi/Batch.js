@@ -1,2 +1,2 @@
 import AppSetting from '../AppSetting';
-export const BATCHLIST = `${AppSetting.apiserver}batches/`;
+export const BATCHLISTAPI = `${AppSetting.apiserver}batches/`;

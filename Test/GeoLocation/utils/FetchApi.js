@@ -12,6 +12,5 @@ export const Fetch = async(request) =>{
         }),
         body:JSON.stringify(request.body)
     });
-    let responseJson = await response.json();
-    return responseJson;
+    return await response.json();
 }

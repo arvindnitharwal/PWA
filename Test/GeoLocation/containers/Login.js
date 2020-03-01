@@ -25,7 +25,7 @@ export default class Login extends Component {
     this.setState({password:password})
   }
   vaildateUser = (storedUsername,storedPassword) =>{
-    return ((storedUsername===JSON.stringify(this.state.userName)) && (storedPassword===JSON.stringify(this.state.password)));
+    return ((storedUsername===this.state.userName) && (storedPassword===this.state.password));
   }
   loginCredentials = async() =>{
     let response= await NetInfo.fetch();
@@ -38,7 +38,7 @@ export default class Login extends Component {
         this.props.navigation.navigate('Batch')
       }
       else{
-        Alert.alert("Invalid username or password!!");
+        Alert.alert("Invalid username or password !!");
       }
     }
     else{
@@ -47,7 +47,7 @@ export default class Login extends Component {
     data.username = this.state.userName;
     data.password = this.state.password;
     request.method="POST";
-    request.url='https://apitest.aibono.net/v1/auth/token/';
+    request.url=LOGINAPI;
     request.body=data;
     let response = await Fetch(request);
     if(response.access){
@@ -64,10 +64,10 @@ export default class Login extends Component {
   }
   render() {
     return (
-      <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
+      <KeyboardAvoidingView style={styles.wrapper}>
          <AppHeader/>
         <View style={styles.scrollViewWrapper}>
-          <ScrollView style={styles.scrollView}>
+          <ScrollView >
             <InputField 
               labelText="Username" 
               labelTextSize={14} 

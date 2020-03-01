@@ -11,13 +11,13 @@ export const save = async(key, value) => {
   };
 
   export const get = async (key) => {
-    let value = '';
     try {
-        value = await AsyncStorage.getItem(key) || 'none';
+      let response= await AsyncStorage.getItem(key) || null;
+      return JSON.parse(response);
     } catch (error) {
       console.log(error.message);
+      return null;
     }
-    return value;
   }
 
   export const remove = async (key) => {
@@ -47,15 +47,32 @@ export const save = async(key, value) => {
     }
   }
 
+  export const removeFromArray = async (key,value) =>{
+    try {
+      let response = await AsyncStorage.getItem(key) || null;
+      if(response!=null){
+      response=JSON.parse(response);
+      response.splice(response.findIndex(e => e==value),1);
+      }
+      await AsyncStorage.setItem(key, JSON.stringify(response));
+      return true;
+    } catch (error) {
+      console.log(error.message);
+      return false;
+    }
+  }
+
 ///action
   export const ACTION ={
     GET : "get",
     SAVE : "save",
     REMOVE : "remove",
-    UPDATE : "update"
+    UPDATE : "update",
+    REMOVEFROMARRAY :"removefromarray"
 }
 ///keys
 export const STORAGEKEYS ={
+  INDIVIDUALBATCHLOCATION : "aibono_individual_",
   BATCHLOCATION : "aibono_batchlocation_",
   BATCHTOBESYNC :"aibono_batchtobesync"
 }
